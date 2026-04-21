@@ -1,15 +1,37 @@
 import minimist from "minimist";
+import { PelisController } from "./controllers";
 
-function parseaParams(argv) {
-  const resultado = minimist(argv);
+const pelisController = new PelisController();
 
-  return resultado;
-}
+async function main() {
+ const params = minimist(process.argv.slice(2));
+  
+  if(params._[0] === "add"){
+    //Lógica para agregar una peli
+    const peli = {
+      id: Number(params.id),
+      title: params.title,
+      tags: Array.isArray(params.tags) ? params.tags : [params.tags],
+    }
+    const mensaje = await pelisController.add(peli);
+    console.log(mensaje);
 
-function main() {
-  const params = parseaParams(process.argv.slice(2));
-
-  console.log(params);
+  }else if(params._[0] === "get"){
+    //Obtener una peli por ID
+    const peli = await pelisController.getOne({
+      id: Number(params._[1]) 
+    }); 
+    console.log(peli);
+    
+  }else if(params._[0] === "search"){
+    const results = await pelisController.get({
+      search:{title:params.title, tag:params.tag}
+    });
+    console.log(results);
+  }else{
+    const pelis = await pelisController.get();
+    console.log(pelis);
+  } 
 }
 
 main();
