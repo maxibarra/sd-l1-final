@@ -1,17 +1,21 @@
 import minimist from "minimist";
 import { PelisController } from "./controllers";
 
+
 const pelisController = new PelisController();
 
 async function main() {
  const params = minimist(process.argv.slice(2));
   
   if(params._[0] === "add"){
+    const tags = params.tags ? (Array.isArray(params.tags) ? params.tags : [params.tags]) 
+    : [];
+
     //Lógica para agregar una peli
     const peli = {
       id: Number(params.id),
       title: params.title,
-      tags: Array.isArray(params.tags) ? params.tags : [params.tags],
+      tags: tags,
     }
     const mensaje = await pelisController.add(peli);
     console.log(mensaje);
