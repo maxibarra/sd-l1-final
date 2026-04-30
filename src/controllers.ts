@@ -19,7 +19,8 @@ class PelisController {
     return peli ? [peli] : [];
   }
   if (options?.search) {
-    return this.model.search(options.search);
+    const results = this.model.search(options.search);
+    return results;
   }
   return this.model.getAll();
   }
