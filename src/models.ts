@@ -22,9 +22,13 @@ class PelisCollection {
     }
 
     const NuevaData = [...pelis,peli];
-    await jsonfile.writeFile("./pelis.json",NuevaData);
-
+     try {
+    await jsonfile.writeFile("./pelis.json", NuevaData);
     return true;
+  } catch (e) {
+    // si falla la escritura, la promesa debe resolver en false
+    return false;
+  }
   }
   
   async getAll(): Promise<Peli[]> {
