@@ -14,10 +14,14 @@ class PelisController {
     this.model = new PelisCollection();
   }
   async get(options? :Options):Promise<Peli[]> {
-    if(options?.search){
-      return this.model.search(options.search);
-    }
-    return this.model.getAll();
+    if (options?.id !== undefined) {
+    const peli = await this.model.getById(options.id);
+    return peli ? [peli] : [];
+  }
+  if (options?.search) {
+    return this.model.search(options.search);
+  }
+  return this.model.getAll();
   }
   async getOne(options: { id: number }): Promise<Peli | undefined > {
     return this.model.getById(options.id);

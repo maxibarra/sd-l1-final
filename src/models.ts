@@ -39,7 +39,7 @@ class PelisCollection {
   async getById(id:number):Promise<Peli | undefined > {
     const pelis = await this.getAll();
     if(!pelis) return undefined;
-    return pelis.find((p) => p.id == id);
+    return pelis.find((p) => p.id === id);
   }
 
   async search(options:SearchOptions){
