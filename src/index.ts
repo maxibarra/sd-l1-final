@@ -19,12 +19,6 @@ async function main() {
       console.error("El id es obligatorio y debe ser un número válido");
       return;
     }
-    // validar id en comando get
-    const idToGet = Number(params._[1]);
-    if (!Number.isInteger(idToGet)) {
-      console.error("El id para 'get' debe ser un número");
-      return;
-    }
     // validar título mínimo
     if (!params.title) {
       console.error("El title es obligatorio");
