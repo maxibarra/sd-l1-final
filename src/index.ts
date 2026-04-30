@@ -30,10 +30,13 @@ async function main() {
     console.log(mensaje);
   } else if (params._[0] === "get") {
     //Obtener una peli por ID
-    const peli = await pelisController.getOne({
-      id: Number(params._[1]),
-    });
-    console.log(peli);
+    const id = Number(params._[1]);
+    if (!Number.isInteger(id)) {
+      console.error("El id para 'get' debe ser un número entero");
+      return;
+    }
+      const peli = await pelisController.getOne({ id });
+      console.log(peli);
   } else if (params._[0] === "search") {
     const results = await pelisController.get({
       search: { title: params.title, tag: params.tag },

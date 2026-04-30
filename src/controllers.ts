@@ -19,7 +19,7 @@ class PelisController {
     return peli ? [peli] : [];
   }
   if (options?.search) {
-    const results = this.model.search(options.search);
+    const results = await this.model.search(options.search);
     return results;
   }
   return this.model.getAll();

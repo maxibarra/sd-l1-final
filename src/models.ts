@@ -52,10 +52,10 @@ class PelisCollection {
       let cumple = true;
 
       if(options.title){
-        cumple =cumple && p.title.includes(options.title);
+        cumple =cumple && p.title.toLowerCase().includes(options.title.toLowerCase());
       }
       if(options.tag){
-        cumple = cumple && p.tags.includes(options.tag);
+        cumple = cumple && p.tags.map(t => t.toLowerCase()).includes(options.tag.toLowerCase());
       }
       return cumple;
     });
