@@ -22,7 +22,7 @@ class PelisController {
     const results = await this.model.search(options.search);
     return results;
   }
-  return this.model.getAll();
+  return await this.model.getAll();
   }
   async getOne(options: { id: number }): Promise<Peli | undefined > {
     return this.model.getById(options.id);

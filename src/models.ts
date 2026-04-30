@@ -45,7 +45,7 @@ class PelisCollection {
     return pelis.find((p) => p.id === id);
   }
 
-  async search(options:SearchOptions){
+  async search(options:SearchOptions): Promise <Peli[]>{
     const lista = await this.getAll();
 
     return lista.filter((p) => {
