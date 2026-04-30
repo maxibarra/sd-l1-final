@@ -10,13 +10,13 @@ async function main() {
   if(params._[0] === "add"){
     const tags = params.tags ? (Array.isArray(params.tags) ? params.tags : [params.tags]) 
     : [];
-
     //Lógica para agregar una peli
-    const peli = {
-      id: Number(params.id),
-      title: params.title,
-      tags: tags,
-    }
+    const id = Number(params.id); 
+      if(!id){
+        console.error("El id es obligatorio y debe ser un número válido")
+      }
+    const peli = {id,title: params.title,tags};
+
     const mensaje = await pelisController.add(peli);
     console.log(mensaje);
 
